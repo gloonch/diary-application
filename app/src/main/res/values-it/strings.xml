@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Diario</string>
+    <string name="today_s_diary">Diario di oggi …</string>
+    <string name="save">Salvare</string>
+    <string name="setting">Ambientazione</string>
+    <string name="change_language">Cambia lingua</string>
+    <string name="diary_has_been_saved">Il diario è stato salvato</string>
+
+    <string-array name="languages">
+        <item>Inglese</item>
+        <item>francese</item>
+        <item>Tedesco</item>
+        <item>portoghese</item>
+        <item>Italian</item>
+        <item>Spanish</item>
+    </string-array>
+</resources>

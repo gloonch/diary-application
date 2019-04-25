@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/minimal_background"
+    android:focusedByDefault="true"
+    tools:context=".MainActivity">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:orientation="vertical">
+
+        <!--first layout-->
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_140sdp"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/_20sdp"
+                android:paddingBottom="@dimen/_20sdp">
+
+                <TextView
+                    android:id="@+id/dayID"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:textColor="@color/purewhite"
+                    android:textSize="@dimen/_40sdp" />
+
+                <TextView
+                    android:id="@+id/dateID"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:textColor="@color/purewhite"
+                    android:textSize="@dimen/_25sdp" />
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+
+        <!--second layout -->
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_210sdp"
+            android:background="@drawable/fragmenttheme"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/_25sdp">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:id="@+id/centerlayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60sdp"
+                android:gravity="center">
+
+
+                <EditText
+                    android:id="@+id/diaryID"
+                    android:layout_width="@dimen/_250sdp"
+                    android:layout_height="@dimen/_56sdp"
+                    android:focusedByDefault="false"
+                    android:hint="@string/today_s_diary" />
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <Button
+                android:id="@+id/savebtnID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:background="@color/transparent"
+                android:text="@string/save"
+                android:textColor="@color/purewhite" />
+
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+
+        <!--third layout-->
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|top">
+
+            <ImageButton
+                android:id="@+id/nextbtnID"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:background="@color/transparent"
+                android:padding="@dimen/_17sdp"
+                android:scaleType="fitXY"
+                android:src="@drawable/next_icon" />
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+</RelativeLayout>
