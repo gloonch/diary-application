@@ -1,4 +1,4 @@
-package diary.tehranqolhak.diary.DB;
+package diary.tehranqolhak.diary.Utils;
 
 public class DiaryModel {
     private int id;
@@ -6,11 +6,6 @@ public class DiaryModel {
 
     public DiaryModel() {}
 
-    public DiaryModel(int id, String description, String date) {
-        this.id = id;
-        this.description = description;
-        this.date = date;
-    }
 
     public int getId() {
         return id;

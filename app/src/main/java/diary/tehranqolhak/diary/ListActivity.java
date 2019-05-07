@@ -1,16 +1,17 @@
 package diary.tehranqolhak.diary;
 
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 import java.util.Locale;
 import diary.tehranqolhak.diary.DB.DBHandler;
-import diary.tehranqolhak.diary.DB.DiaryModel;
+import diary.tehranqolhak.diary.Utils.DiaryModel;
+import diary.tehranqolhak.diary.Utils.ListAdapter;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -26,6 +27,7 @@ public class ListActivity extends AppCompatActivity {
         listview = findViewById(R.id.list);
         dbHandler = new DBHandler(this);
         generateList();
+
 
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -53,10 +55,9 @@ public class ListActivity extends AppCompatActivity {
                 return false;
             }
         });
-
 //        findViewById(R.id.settingActivity).setOnClickListener(v -> {startActivity(new Intent(this, SettingActivity.class));});
-
     }
+
     public void showAlertDialog(String title, String yes, String cancel, AdapterView<?> adapterView, int i){
         new AlertDialog.Builder(ListActivity.this).setTitle(title)
                 .setPositiveButton(yes, new DialogInterface.OnClickListener() {

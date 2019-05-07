@@ -1,18 +1,14 @@
-package diary.tehranqolhak.diary;
+package diary.tehranqolhak.diary.Utils;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import java.util.List;
 
-import diary.tehranqolhak.diary.DB.DBHandler;
-import diary.tehranqolhak.diary.DB.DiaryModel;
+import diary.tehranqolhak.diary.R;
 
 public class ListAdapter extends BaseAdapter {
 
@@ -47,7 +43,6 @@ public class ListAdapter extends BaseAdapter {
         TextView date = view.findViewById(R.id.memmoryDate);
         descr.setText(diaryModels.get(i).getDescription());
         date.setText(diaryModels.get(i).getDate());
-
         return view;
     }
 }

@@ -2,18 +2,18 @@ package diary.tehranqolhak.diary;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import diary.tehranqolhak.diary.DB.DBHandler;
-import diary.tehranqolhak.diary.DB.DiaryModel;
+import diary.tehranqolhak.diary.Utils.DiaryModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         dbHandler = new DBHandler(this);
         savebtnID.setOnClickListener(v -> {
-            if ( diaryID.getText().toString().trim().equalsIgnoreCase("")) {
+            if (diaryID.getText().toString().trim().equalsIgnoreCase("")) {
                 diaryID.setError(null);
             } else {
                 dbHandler.open();
@@ -45,29 +45,31 @@ public class MainActivity extends AppCompatActivity {
                 dbHandler.addDiary(dm);
                 dbHandler.close();
                 diaryID.setText("");
-                switch (locale) {
-                    case "English":
-                        Toast.makeText(this, "Diary has been saved", Toast.LENGTH_SHORT).show();
-                        break;
-                    case "Deutsch":
-                        Toast.makeText(this, "Tagebuch wurde gerettet", Toast.LENGTH_SHORT).show();
-                        break;
-                    case "español":
-                        Toast.makeText(this, "El diario ha sido guardado", Toast.LENGTH_SHORT).show();
-                        break;
-                    case "français":
-                        Toast.makeText(this, "Journal a été enregistré", Toast.LENGTH_SHORT).show();
-                        break;
-                    case "italiano":
-                        Toast.makeText(this, "Il diario è stato salvato", Toast.LENGTH_SHORT).show();
-                        break;
-                    case "português":
-                        Toast.makeText(this, "O diário foi salvo", Toast.LENGTH_SHORT).show();
-                        break;
-                }
+                    switch (locale) {
+                        case "English":
+                            Toast.makeText(this, "Diary has been saved", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "Deutsch":
+                            Toast.makeText(this, "Tagebuch wurde gerettet", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "español":
+                            Toast.makeText(this, "El diario ha sido guardado", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "français":
+                            Toast.makeText(this, "Journal a été enregistré", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "italiano":
+                            Toast.makeText(this, "Il diario è stato salvato", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "português":
+                            Toast.makeText(this, "O diário foi salvo", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
             }
         });
-        nextbtnID.setOnClickListener(v ->{startActivity(new Intent(this, ListActivity.class));});
+        nextbtnID.setOnClickListener(v -> {
+            startActivity(new Intent(this, ListActivity.class));
+        });
     }
 
     @Override
