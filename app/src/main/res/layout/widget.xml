@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_210sdp"
+    android:gravity="center"
+    android:background="@drawable/shape_widget"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/_25sdp">
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/diaryID"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_55sdp"
+        android:hint="@string/today_s_diary" />
+
+    <Button
+        android:id="@+id/savebtnID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:background="@color/transparent"
+        android:text="@string/save"
+        android:textColor="@color/purewhite" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

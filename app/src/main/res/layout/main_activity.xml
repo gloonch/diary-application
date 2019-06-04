@@ -60,26 +60,26 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="@dimen/_210sdp"
-            android:background="@drawable/fragmenttheme"
+            android:background="@drawable/shape"
             android:gravity="center"
             android:orientation="vertical"
             android:paddingTop="@dimen/_25sdp">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/centerlayout"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_60sdp"
-                android:gravity="center">
+            <!--<androidx.appcompat.widget.LinearLayoutCompat-->
+                <!--android:id="@+id/centerlayout"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/_60sdp"-->
+                <!--android:gravity="center">-->
 
 
-                <EditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/diaryID"
                     android:layout_width="@dimen/_250sdp"
-                    android:layout_height="@dimen/_65sdp"
+                    android:layout_height="@dimen/_55sdp"
                     android:focusedByDefault="false"
                     android:hint="@string/today_s_diary" />
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            <!--</androidx.appcompat.widget.LinearLayoutCompat>-->
 
             <Button
                 android:id="@+id/savebtnID"

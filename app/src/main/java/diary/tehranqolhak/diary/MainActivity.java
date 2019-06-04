@@ -1,15 +1,21 @@
 package diary.tehranqolhak.diary;
 
 import android.content.Intent;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
+import android.graphics.drawable.Icon;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 import diary.tehranqolhak.diary.DB.DBHandler;
@@ -20,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     TextView dayID, dateID;
     ImageButton nextbtnID;
     Button savebtnID;
-    EditText diaryID;
+    AppCompatEditText diaryID;
     Boolean backpressed = false;
     String todaysPostDate;
     DBHandler dbHandler;
@@ -32,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
         bind();
         showDate();
+        generateShortcut();
 
         dbHandler = new DBHandler(this);
         savebtnID.setOnClickListener(v -> {
@@ -136,6 +143,25 @@ public class MainActivity extends AppCompatActivity {
                     backpressed = false;
                 }
             }, 2000);
+        }
+    }
+
+    private void generateShortcut() {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1){
+
+            ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
+            Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+            intent.setAction(Intent.ACTION_VIEW);
+            ShortcutInfo shortcut = new ShortcutInfo.Builder(getApplicationContext(), "id1")
+                    .setShortLabel("Diary list")
+                    .setLongLabel("Diary list page")
+                    .setIcon(Icon.createWithResource(getApplicationContext(), R.drawable.shortcut_list_activity))
+                    .setIntent(intent)
+                    .build();
+
+            shortcutManager.setDynamicShortcuts(Collections.singletonList(shortcut));
+//            shortcutManager.setDynamicShortcuts(Arrays.asList(shortcut));
+
         }
     }
 }
