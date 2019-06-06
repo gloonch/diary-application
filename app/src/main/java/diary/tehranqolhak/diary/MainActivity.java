@@ -1,8 +1,15 @@
 package diary.tehranqolhak.diary;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Build;
@@ -12,12 +19,17 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
+
 import diary.tehranqolhak.diary.DB.DBHandler;
 import diary.tehranqolhak.diary.Utils.DiaryModel;
 
@@ -52,54 +64,83 @@ public class MainActivity extends AppCompatActivity {
                 dbHandler.addDiary(dm);
                 dbHandler.close();
                 diaryID.setText("");
-                    switch (locale) {
-                        case "English":
-                            Toast.makeText(this, "Diary has been saved", Toast.LENGTH_SHORT).show();
-                            break;
-                        case "Deutsch":
-                            Toast.makeText(this, "Tagebuch wurde gerettet", Toast.LENGTH_SHORT).show();
-                            break;
-                        case "español":
-                            Toast.makeText(this, "El diario ha sido guardado", Toast.LENGTH_SHORT).show();
-                            break;
-                        case "français":
-                            Toast.makeText(this, "Journal a été enregistré", Toast.LENGTH_SHORT).show();
-                            break;
-                        case "italiano":
-                            Toast.makeText(this, "Il diario è stato salvato", Toast.LENGTH_SHORT).show();
-                            break;
-                        case "português":
-                            Toast.makeText(this, "O diário foi salvo", Toast.LENGTH_SHORT).show();
-                            break;
-                    }
+                switch (locale) {
+                    case "English":
+                        Toast.makeText(this, "Diary has been saved", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "Deutsch":
+                        Toast.makeText(this, "Tagebuch wurde gerettet", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "español":
+                        Toast.makeText(this, "El diario ha sido guardado", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "français":
+                        Toast.makeText(this, "Journal a été enregistré", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "italiano":
+                        Toast.makeText(this, "Il diario è stato salvato", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "português":
+                        Toast.makeText(this, "O diário foi salvo", Toast.LENGTH_SHORT).show();
+                        break;
+                }
             }
         });
         nextbtnID.setOnClickListener(v -> {
             startActivity(new Intent(this, ListActivity.class));
         });
+        dateID.setOnClickListener(view -> {
+            showNotification("Diary", "Diary is reminding you to ...",
+                    "Reminder", "main_channel", new Intent());
+        });
     }
 
-    @Override
-    protected void onPause() {
-        dbHandler.close();
-        super.onPause();
+    public void showNotification(String title, String text, String channel_name, String channel_id, Intent intent) {
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel mChannel = new NotificationChannel(channel_id, channel_name, NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(mChannel);
+        }
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), channel_id)
+                .setSmallIcon(R.drawable.splashlogo)
+                .setContentTitle(title)
+                .setContentText(text);
+        Intent open = new Intent(getApplicationContext(), MainActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(MainActivity.this);
+        stackBuilder.addParentStack(MainActivity.class);
+        stackBuilder.addNextIntent(open);
+        PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(pendingIntent);
+
+        stackBuilder.addNextIntent(intent);
+        mBuilder.setContentIntent(pendingIntent);
+        mBuilder.setAutoCancel(true);
+
+        notificationManager.notify(13, mBuilder.build());
     }
 
-    @Override
-    protected void onResume() {
-        dbHandler.open();
-        super.onResume();
+    private void generateShortcut() {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+
+            ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
+            Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+            intent.setAction(Intent.ACTION_VIEW);
+            ShortcutInfo shortcut = new ShortcutInfo.Builder(getApplicationContext(), "id1")
+                    .setShortLabel("Diary list")
+                    .setLongLabel("Diary list page")
+                    .setIcon(Icon.createWithResource(getApplicationContext(), R.drawable.shortcut_list_activity))
+                    .setIntent(intent)
+                    .build();
+
+            shortcutManager.setDynamicShortcuts(Collections.singletonList(shortcut));
+//            shortcutManager.setDynamicShortcuts(Arrays.asList(shortcut));
+
+        }
     }
 
-    void bind() {
-        nextbtnID = findViewById(R.id.nextbtnID);
-        dateID = findViewById(R.id.dateID);
-        dayID = findViewById(R.id.dayID);
-        diaryID = findViewById(R.id.diaryID);
-        savebtnID = findViewById(R.id.savebtnID);
-    }
-
-    public void showDate() {
+    private void showDate() {
         //day of week
         SimpleDateFormat dow = new SimpleDateFormat("EEE");
         Date dayName = new Date();
@@ -116,6 +157,26 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat format1 = new SimpleDateFormat("YYYY / dd / MM");
         Date monthAndDay1 = new Date();
         todaysPostDate = format1.format(monthAndDay1);
+    }
+
+    private void bind() {
+        nextbtnID = findViewById(R.id.nextbtnID);
+        dateID = findViewById(R.id.dateID);
+        dayID = findViewById(R.id.dayID);
+        diaryID = findViewById(R.id.diaryID);
+        savebtnID = findViewById(R.id.savebtnID);
+    }
+
+    @Override
+    protected void onPause() {
+        dbHandler.close();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        dbHandler.open();
+        super.onResume();
     }
 
     @Override
@@ -143,25 +204,6 @@ public class MainActivity extends AppCompatActivity {
                     backpressed = false;
                 }
             }, 2000);
-        }
-    }
-
-    private void generateShortcut() {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1){
-
-            ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
-            Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-            intent.setAction(Intent.ACTION_VIEW);
-            ShortcutInfo shortcut = new ShortcutInfo.Builder(getApplicationContext(), "id1")
-                    .setShortLabel("Diary list")
-                    .setLongLabel("Diary list page")
-                    .setIcon(Icon.createWithResource(getApplicationContext(), R.drawable.shortcut_list_activity))
-                    .setIntent(intent)
-                    .build();
-
-            shortcutManager.setDynamicShortcuts(Collections.singletonList(shortcut));
-//            shortcutManager.setDynamicShortcuts(Arrays.asList(shortcut));
-
         }
     }
 }
