@@ -5,6 +5,7 @@
     <string name="setting">Rahmen</string>
     <string name="change_language">Sprache ändern</string>
     <string name="diary_has_been_saved">Tagebuch wurde gerettet</string>
+    <string name="remind_me_to_write_on">Remind me to write on :</string>
 
     <string-array name="languages">
         <item>Englisch</item>

@@ -40,9 +40,8 @@ public class MainActivity extends AppCompatActivity {
     Button savebtnID;
     AppCompatEditText diaryID;
     Boolean backpressed = false;
-    String todaysPostDate;
+    String todaysPostDate, locale = Locale.getDefault().getDisplayLanguage();
     DBHandler dbHandler;
-    String locale = Locale.getDefault().getDisplayLanguage();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,36 +88,6 @@ public class MainActivity extends AppCompatActivity {
         nextbtnID.setOnClickListener(v -> {
             startActivity(new Intent(this, ListActivity.class));
         });
-        dateID.setOnClickListener(view -> {
-            showNotification("Diary", "Diary is reminding you to ...",
-                    "Reminder", "main_channel", new Intent());
-        });
-    }
-
-    public void showNotification(String title, String text, String channel_name, String channel_id, Intent intent) {
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            NotificationChannel mChannel = new NotificationChannel(channel_id, channel_name, NotificationManager.IMPORTANCE_HIGH);
-            notificationManager.createNotificationChannel(mChannel);
-        }
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), channel_id)
-                .setSmallIcon(R.drawable.splashlogo)
-                .setContentTitle(title)
-                .setContentText(text);
-        Intent open = new Intent(getApplicationContext(), MainActivity.class);
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(MainActivity.this);
-        stackBuilder.addParentStack(MainActivity.class);
-        stackBuilder.addNextIntent(open);
-        PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-        mBuilder.setContentIntent(pendingIntent);
-
-        stackBuilder.addNextIntent(intent);
-        mBuilder.setContentIntent(pendingIntent);
-        mBuilder.setAutoCancel(true);
-
-        notificationManager.notify(13, mBuilder.build());
     }
 
     private void generateShortcut() {

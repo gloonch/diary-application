@@ -5,6 +5,7 @@
     <string name="setting">Ambientazione</string>
     <string name="change_language">Cambia lingua</string>
     <string name="diary_has_been_saved">Il diario è stato salvato</string>
+    <string name="remind_me_to_write_on">Remind me to write on :</string>
 
     <string-array name="languages">
         <item>Inglese</item>

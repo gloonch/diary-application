@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="diary.tehranqolhak.diary">
+    <uses-permission android:name="android.permission.SET_ALARM"/>
 
     <application
         android:allowBackup="true"
@@ -33,6 +34,7 @@
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info"/>
         </receiver>
+        <receiver android:name=".reminder"/>
 
     </application>
 

@@ -1,14 +1,26 @@
 package diary.tehranqolhak.diary;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Switch;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
+
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
+
 import diary.tehranqolhak.diary.DB.DBHandler;
 import diary.tehranqolhak.diary.Utils.DiaryModel;
 import diary.tehranqolhak.diary.Utils.ListAdapter;
@@ -18,6 +30,7 @@ public class ListActivity extends AppCompatActivity {
     ListView listview;
     DBHandler dbHandler;
     ListAdapter adapter;
+
     String locale = Locale.getDefault().getDisplayLanguage();
 
     @Override
@@ -25,9 +38,8 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         listview = findViewById(R.id.list);
-        dbHandler = new DBHandler(this);
-        generateList();
 
+        dbHandler = new DBHandler(this);
 
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -55,10 +67,14 @@ public class ListActivity extends AppCompatActivity {
                 return false;
             }
         });
-//        findViewById(R.id.settingActivity).setOnClickListener(v -> {startActivity(new Intent(this, SettingActivity.class));});
+        findViewById(R.id.settingActivity).setOnClickListener(v -> {
+            startActivity(new Intent(this, SettingActivity.class));
+        });
+        generateList();
+
     }
 
-    public void showAlertDialog(String title, String yes, String cancel, AdapterView<?> adapterView, int i){
+    public void showAlertDialog(String title, String yes, String cancel, AdapterView<?> adapterView, int i) {
         new AlertDialog.Builder(ListActivity.this).setTitle(title)
                 .setPositiveButton(yes, new DialogInterface.OnClickListener() {
                     @Override
@@ -71,6 +87,7 @@ public class ListActivity extends AppCompatActivity {
                     }
                 }).setNeutralButton(cancel, null).show();
     }
+
     public void generateList() {
         dbHandler.open();
         List<DiaryModel> diaryModels = dbHandler.getAllDiary();

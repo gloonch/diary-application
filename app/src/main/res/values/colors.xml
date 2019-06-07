@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#294288</color>
     <color name="colorAccent">#FFF000</color>
     <color name="purewhite">#fff</color>
+    <color name="ki">#D8D8D8</color>
     <color name="transparent">#00000000</color>
 
 </resources>
