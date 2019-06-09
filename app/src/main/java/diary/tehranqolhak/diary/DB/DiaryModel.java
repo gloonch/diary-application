@@ -1,4 +1,4 @@
-package diary.tehranqolhak.diary.Utils;
+package diary.tehranqolhak.diary.DB;
 
 public class DiaryModel {
     private int id;

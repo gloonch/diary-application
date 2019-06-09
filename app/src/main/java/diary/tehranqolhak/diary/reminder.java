@@ -20,29 +20,28 @@ public class reminder extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         switch (locale) {
             case "English":
-                showNotification(context, "Remember to submit diary",
-                        "How was today ? write it up", "Reminder", "reminder");
+                showNotification(context, "How was your day ?",
+                        "Write it down ...", "Reminder", "reminder");
                 break;
-//                TODO translate these all
             case "Deutsch":
-                showNotification(context, "Remember to submit diary",
-                        "How was today ? write it up", "Reminder", "reminder");
+                showNotification(context, "Wie war dein Tag ?",
+                        "Schreib es auf ...", "Reminder", "reminder");
                 break;
             case "español":
-                showNotification(context, "Remember to submit diary",
-                        "How was today ? write it up", "Reminder", "reminder");
+                showNotification(context, "Que tal tu día ?",
+                        "Escríbelo ...", "Reminder", "reminder");
                 break;
             case "français":
-                showNotification(context, "Remember to submit diary",
-                        "How was today ? write it up", "Reminder", "reminder");
+                showNotification(context, "Comment était ta journée ?",
+                        "Écris le ...", "Reminder", "reminder");
                 break;
             case "italiano":
-                showNotification(context, "Remember to submit diary",
-                        "How was today ? write it up", "Reminder", "reminder");
+                showNotification(context, "Com'è stata la tua giornata ?",
+                        "Scrivilo ...", "Reminder", "reminder");
                 break;
             case "português":
-                showNotification(context, "Remember to submit diary",
-                        "How was today ? write it up", "Reminder", "reminder");
+                showNotification(context, "Como foi o seu dia ?",
+                        "Anotá-la ...", "Reminder", "reminder");
                 break;
         }
 
@@ -59,7 +58,7 @@ public class reminder extends BroadcastReceiver {
             notificationManager.createNotificationChannel(mChannel);
         }
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, channel_id)
-                .setSmallIcon(R.drawable.splashlogo)
+                .setSmallIcon(R.drawable.notify)
                 .setContentTitle(title)
                 .setContentText(text);
         Intent open = new Intent(context, MainActivity.class);

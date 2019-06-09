@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import java.util.List;
 
+import diary.tehranqolhak.diary.DB.DiaryModel;
 import diary.tehranqolhak.diary.R;
 
 public class ListAdapter extends BaseAdapter {

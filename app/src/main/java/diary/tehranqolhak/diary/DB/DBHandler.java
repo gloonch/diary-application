@@ -8,8 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import diary.tehranqolhak.diary.Utils.DiaryModel;
-
 public class DBHandler {
     private SQLiteOpenHelper sqLiteOpenHelper;
     private SQLiteDatabase database;
